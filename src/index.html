@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator</title>
+    <script src="index.js" defer></script>
+  </head>
+  <body class="bg-pink-600 min-h-full">
+    <div class="mx-auto max-w-screen-md p-4">
+      <div class="p-4 rounded-lg bg-white shadow">
+        <div class="font-extrabold text-2xl mb-4">Password Generator</div>
+
+        <form id="generate">
+          <div class="flex flex-col gap-2">
+            <div>
+              <label for="length">Length:</label>
+
+              <input
+                type="number"
+                name="length"
+                required
+                value="14"
+                min="6"
+                max="512"
+                id="length"
+                class="px-2 py-1 rounded bg-gray-200"
+              />
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                checked
+                name="includeUpperCase"
+                id="upper"
+              />
+              <label for="upper">Upper Case</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                checked
+                name="includeLowerCase"
+                id="lower"
+              />
+              <label for="lower">Lower Case</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                checked
+                name="includeNumbers"
+                id="numbers"
+              />
+              <label for="numbers">Numbers</label>
+            </div>
+            <div>
+              <input type="checkbox" name="includeSpecials" id="special" />
+              <label for="special">Special Chars</label>
+            </div>
+            <div>
+              <button class="w-full bg-green-600 text-white p-2 rounded">
+                Generate!
+              </button>
+            </div>
+
+            <div>
+              <input
+                type="text"
+                disabled
+                placeholder="Your password will appear here"
+                id="password"
+                class="w-full bg-gray-200 p-2 rounded"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="text-sm mt-2 text-center text-gray-500">
+        2021 - Freerk-Ole Zakfeld.
+      </div>
+    </div>
+  </body>
+</html>
