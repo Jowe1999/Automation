@@ -1,0 +1,32 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [master]
+
+  workflow_dispatch: # allow manual trigger of the workflow
+
+jobs:
+  build-deploy:
+    name: Build frontend and deploy to server
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v2 # checkout code
+      - uses: actions/setup-node@v2 # install Node.js 14
+        with:
+          node-version: 14
+      - run: npm ci # install required NPM packages
+      - run: npm run build # build frontend (using parcel in our case)
+      - uses: actions/upload-artifact@v2 # upload build for further use
+        with:
+          name: build
+          path: ./dist
+      - uses: burnett01/rsync-deployments@5.0 # copy build files to server
+        with:
+          switches: -avzr --delete # delete previous version of website
+          path: ./dist/
+          remote_path: ${{ secrets.DEPLOY_TARGET }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}
